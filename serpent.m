@@ -3,9 +3,9 @@ clear all;clf;
 hold on;
 axis equal;
 
-% pi = sym(pi)
+origin = [0 0];
+q = [pi/4 pi/2 pi/4 pi/6 0];
 
-q = [0;0;pi/6;pi/4;0];
 obstacle = [
     3 0;
     3 1;
@@ -13,4 +13,4 @@ obstacle = [
     4 0
 ];
 
-dessin_serpent(q,obstacle);
+pos_effector = dessin_serpent(q,obstacle,origin)

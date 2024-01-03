@@ -1,50 +1,27 @@
-function [] = dessin_serpent(q,obstacle)
+function [pos_effector] = dessin_serpent(q,obstacle,origin)
 %DESSIN_SERPENT Dessine le serpent et l'obstacle
-%   q : Matrice Nx1, contenant les N degrés de liberté
-%   obstacle : Matrice Nx2, contenant les coordonnées des N sommets du
+%   q : Vecteur 1xN, contenant les N degrés de liberté
+%   obstacle : Matrice Mx2, contenant les coordonnées des M sommets du
 %   polygone correspondant à l'obstacle
+%RETOURNE la cinématique directe (position de l'effecteur en fonction
+%   des angles d'entrée q)
+
+% Calcul des coordonnées du serpent
+[joints_X, joints_Y, color] = calc_serpent(q, obstacle, origin);
 
 % Dessin de l'obstacle
-plot(obstacle(:,1)', obstacle(:,2)', 'r');
-
-% Calcul des coordonnées des joints
-[m n] = size(q);
-X = [0];
-Y = [0];
-for i=1:m
-    R = [cos(q(i)) -sin(q(i)) ; sin(q(i)) cos(q(i))];
-    res = [X(end);Y(end)] + (R*[1;0]);
-    X = [X res(1)];
-    Y = [Y res(2)];
-end
-
-% Vérification de collision avec l'obstacle
-[mobs nobs] = size(obstacle);
-are_intersecting = false;
-color = 'b';
-for i=1:m
-    for j=1:mobs
-        seg_1 = [X(i) Y(i) ; X(i+1) Y(i+1)];
-        seg_2 = [obstacle(j,:) ; obstacle(mod(j+1,mobs)+1,:)];
-        if (segment_intersect(seg_1, seg_2))
-            color = 'r';
-            are_intersecting = true;
-            break
-        end
-    end
-    if (are_intersecting)
-        break
-    end
-end
+obstacle_plot = plot(obstacle(:,1)', obstacle(:,2)', 'r');
 
 % Dessine le robot
-for i=1:m
-    plot(X(i), Y(i), 'o', 'Color', color); % Joints
-end
-plot(X, Y, color); % Bras
-plot(X(end), Y(end), 'x', 'Color', color); % Gripper
+joint_plot   = plot(joints_X(1:end-1), joints_Y(1:end-1), 'o', 'Color', color); % Joints
+gripper_plot = plot(joints_X(end), joints_Y(end), 'x', 'Color', color); % Gripper
+arm_plot     = plot(joints_X, joints_Y, color); % Bras
 
+% Retourner la position de l'effecteur (géométrie directe)
+pos_effector = [joints_X(end); joints_Y(end)];
 
+xlim([0 5]);
+ylim([0 5]);
 
 end
 
