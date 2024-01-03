@@ -1,8 +1,6 @@
 function [joints_X, joints_Y, color] = calc_serpent(q,obstacle,origin)
-%CALC_SERPENT Summary of this function goes here
-%   Detailed explanation goes here
-
-
+% RETOURNE les coordonnées des articulations du serpent ainsi que la
+% couleur du plot (rouge si collision avec l'obstacle, bleu sinon)
 
 
 % Calcul des coordonnées des joints
