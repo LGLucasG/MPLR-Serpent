@@ -7,11 +7,13 @@ function [joints_X, joints_Y, color] = calc_serpent(q,obstacle,origin)
 [mq,nq] = size(q);
 joints_X = [origin(1)];
 joints_Y = [origin(2)];
+prev_R = eye(2);
 for i=1:nq
-    R = [cos(q(i)) -sin(q(i)) ; sin(q(i)) cos(q(i))];
+    R = prev_R*[cos(q(i)) -sin(q(i)) ; sin(q(i)) cos(q(i))];
     res = [joints_X(end);joints_Y(end)] + (R*[1;0]);
     joints_X = [joints_X res(1)];
     joints_Y = [joints_Y res(2)];
+    prev_R = R;
 end
 
 % Vérification de collision avec l'obstacle
