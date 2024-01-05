@@ -20,15 +20,15 @@ while (norm(S)>=1e-6)&&(iter<iter_max)&&(norm(qk-prev_qk)>1e-6)
     j = Jac(qk);
     deltaq = -j\S;
     prev_qk = qk;
-    qk = qk + deltaq;
+    qk = qk + deltaq';
     S = F(qk,pos_target,obstacle,origin);
-    qk_temp = [qk_temp qk];
+    qk_temp = [qk_temp; qk];
     iter = iter+1;
 end
 qs = qk;
 
 if (norm(qk-prev_qk)<1e-3)
-    fprintf("Xk converged after %d iterations\n", iter);
+    fprintf("qk converged after %d iterations\n", iter);
 else if (norm(S)<1e-3)
     fprintf("F converged after %d iterations\n", iter);
 else
