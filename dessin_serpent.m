@@ -1,16 +1,18 @@
-function [pos_effector] = dessin_serpent(q,obstacle,origin)
+function [pos_effector] = dessin_serpent(q,obstacle,origin,overwrite_color)
 %DESSIN_SERPENT Dessine le serpent et l'obstacle
 %   q : Vecteur 1xN, contenant les N degrés de liberté
 %   obstacle : Matrice Mx2, contenant les coordonnées des M sommets du
 %   polygone correspondant à l'obstacle
 %RETOURNE la cinématique directe (position de l'effecteur en fonction
 %   des angles d'entrée q)
-clf;
 hold on;
 axis equal;
 
 % Calcul des coordonnées du serpent
 [joints_X, joints_Y, color] = calc_serpent(q, obstacle, origin);
+if all(overwrite_color~='') && all(overwrite_color~=0) && (color~='r')
+    color = overwrite_color;
+end
 
 % Dessin de l'obstacle
 obstacle_plot = plot(cat(2, obstacle(:,1)', obstacle(1,1)), cat(2, obstacle(:,2)', obstacle(1,2)), 'r');

@@ -1,24 +1,33 @@
-function [Xs,Xk_temp] = newton(X0,c,r,iter_max)
+function [qs,qk_temp] = newton(q_start, pos_target, obstacle, origin, iter_max)
 %NEWTON Summary of this function goes here
-%   Detailed explanation goes here
+%   
+%   q_start: position initiale du robot (angles des articulations)
+%   pos_target: position cible de l'effecteur
+%   obstacle: position de l'obstacle
+%   origin: position de l'origine du robot (souvent [0 0])
+%   iter_max: nombre max d'itérations avant arrêt du programme
+%RETOUR
+%   qs: Solution (angles des articulations)
+%   qk_temp: tableau contenant toutes les approximations successives
+%   calculées au cours de l'exécution
 
-Xk = X0;
-prev_Xk = 999999;
-S = F(Xk,c,r);
+qk = q_start;
+prev_qk = 999999;
+S = F(q_start,pos_target,obstacle,origin);
 iter=0;
-Xk_temp = [];
-while (norm(S)>=1e-6)&&(iter<iter_max)&&(norm(Xk-prev_Xk)>1e-6)
-    j = Jac(Xk,c);
-    deltaX = -j\S;
-    prev_Xk = Xk;
-    Xk = Xk + deltaX;
-    S = F(Xk,c,r);
-    Xk_temp = [Xk_temp Xk];
+qk_temp = [];
+while (norm(S)>=1e-6)&&(iter<iter_max)&&(norm(qk-prev_qk)>1e-6)
+    j = Jac(qk);
+    deltaq = -j\S;
+    prev_qk = qk;
+    qk = qk + deltaq;
+    S = F(qk,pos_target,obstacle,origin);
+    qk_temp = [qk_temp qk];
     iter = iter+1;
 end
-Xs = Xk;
+qs = qk;
 
-if (norm(Xk-prev_Xk)<1e-3)
+if (norm(qk-prev_qk)<1e-3)
     fprintf("Xk converged after %d iterations\n", iter);
 else if (norm(S)<1e-3)
     fprintf("F converged after %d iterations\n", iter);
