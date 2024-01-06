@@ -3,17 +3,27 @@ clear all;clf;
 hold on;
 axis equal;
 
-origin = [0 0];
-q = [pi/2 -pi/6 -pi/6 0 0];
+origin = [1 1];
+q = [pi/4 -pi/4 pi/4 -pi/4 pi/4];
 
 obstacle = [
-    3  0;
     3  1;
+    3  2;
+    3  3;
     4  1;
-    4  0;
+    4  2;
+    4  3;
+    5  1;
+    5  2;
+    5  3;
 ];
 
-target_pos1 = [-3 -3];
+pos_effector = dessin_serpent(q,obstacle,origin)
+
+taille = [10, 10];
+tableau = creerTableauAvecObstacles(taille, obstacle)*100
+path = dijkstra_grid(tableau, [1 1], [6 1])
+
 
 pos_effector = dessin_serpent(q,obstacle,origin,0,0)
 
@@ -29,4 +39,7 @@ end
 % Affichage de la solution trouvée
 pos_effector1 = dessin_serpent(target_q1, obstacle, origin, 'g', 0)
 
-
+% target_pos1 = [1 3];
+% target_q1 = solve_serpent_pos_to_angle(q, pos_effector, target_pos1, origin, obstacle)
+% % target_q1(5)=0
+% pos_effector1 = dessin_serpent(target_q1, obstacle, origin)
