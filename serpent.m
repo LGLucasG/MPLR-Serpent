@@ -4,7 +4,7 @@ hold on;
 axis equal;
 
 origin = [0 0];
-q = [pi/2 -pi/6 -pi/6 0 0];
+q = [pi/2 0 0 0 0];
 
 
 obstacle = [
@@ -18,14 +18,12 @@ obstacle = [
     5  2;
     5  3;
 ];
-target_pos1 = [-3 -3];
+target_pos1 = [3 4];
 
-pos_effector = dessin_serpent(q,obstacle,origin,0,0)
-
+pos_effector = round(dessin_serpent(q,obstacle,origin,0,0))
 
 % application de dijkstra
-tableau = creerTableauAvecObstacles([10,10],obstacle)
-path = dijkstra_grid(tableau,[1,1],[7,1])
+% dessin_deplacement(pos_effector', q, target_pos1, 10, obstacle, origin);
 
 % Calcul de la géometrie inverse (méthode de Newton)
 [target_q1, target_q1_succ] = solve_serpent_pos_to_angle(q, target_pos1, obstacle, origin);
