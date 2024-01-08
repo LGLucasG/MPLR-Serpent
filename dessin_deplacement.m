@@ -2,8 +2,8 @@ function [] = dessin_deplacement(start_pos, start_q, finish_pos, steps, obstacle
 %DESSIN_DEPLACEMENT Dessine le déplacement du robot de start_pos vers finish_pos avec steps étapes
 
 % application de dijkstra
-tableau = creerTableauAvecObstacles([steps, steps], obstacle);
-path = dijkstra_grid(tableau,start_pos,finish_pos);
+tableau = tableau_obstacle_wrapper([steps, steps], obstacle);
+path = dijkstra_wrapper(tableau,start_pos,finish_pos)
 [m,n] = size(path);
 q = start_q;
 for i=1:m

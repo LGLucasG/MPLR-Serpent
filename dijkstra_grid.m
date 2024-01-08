@@ -9,7 +9,7 @@ function path = dijkstra_grid(graph, start_pos, goal_pos)
     goal_idx = sub2ind(size(graph), goal_pos(1), goal_pos(2));
 
     % Initialisation
-    dist = inf(numRows, numCols)
+    dist = inf(numRows, numCols);
     dist(start_idx) = 0;
     prev = zeros(numRows, numCols);
 
