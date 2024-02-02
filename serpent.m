@@ -18,7 +18,7 @@ obstacle = [
     5  2;
     5  3;
 ];
-target_pos1 = [3 4];
+target_pos1 = [2 2];
 
 pos_effector = round(dessin_serpent(q,obstacle,origin,0,0))
 
