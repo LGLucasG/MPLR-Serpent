@@ -1,5 +1,5 @@
 # MPLR-Serpent
-## Mathématiques pour la robotique - Projet SERPENT
+## 🤖 Mathématiques pour la robotique - Projet SERPENT 🐍
 
 Ce projet propose une approche de résolution d'un problème de cinématique
 directe/indirecte pour un **robot serpent à 5 degrés de liberté** avec présence d'un obstacle.
