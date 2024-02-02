@@ -24,13 +24,10 @@ obstacle = [
 % Position cible pour l'effecteur
 target_pos1 = [3 2.3];
 
-%% DEROULEMENT DU PROGRAMME PRINCIPAL
+%% DEROULEMENT DU PROGRAMME PRINCIPAL - GEOMETRIE INVERSE
 
 % Plot le robot en position initiale (bleu)
 pos_effector = round(dessin_serpent(q,obstacle,origin,0,0))
-
-% application de dijkstra
-% dessin_deplacement(pos_effector', q, target_pos1, 10, obstacle, origin);
 
 % Calcul de la géometrie inverse (méthode de Newton)
 [target_q1, target_q1_succ] = solve_serpent_pos_to_angle(q, target_pos1, obstacle, origin);
@@ -53,3 +50,8 @@ pos_effector1 = dessin_serpent(target_q1, obstacle, origin, 'g', 0);
 for i=1:m
     dessin_serpent(target_q1_better_succ(i,:), obstacle, origin, 'm', ':');
 end
+
+%% GENERATION D'UNE TRAJECTOIRE ENTRE POSITION DE DEPART ET D'ARRIVEE
+
+% Application de dijkstra
+% dessin_deplacement(pos_effector', q, target_pos1, 10, obstacle, origin);
