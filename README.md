@@ -11,3 +11,10 @@ couleur du plot (rouge si collision avec l'obstacle, bleu sinon).
 angles des articulations (**cinématique directe**) et affiche une figure correspondant
 à la situation pour la visualiser. Comme suggéré précedemment, la couleur du plot
 permet de manifester une éventuelle collision avec l'obstacle.
+- `solve_serpent_pos_to_angle` retourne une configuration possible des moteurs pour
+une position donnée de l'effecteur (**cinématique inverse**). Un algorithme de Newton
+est utilisé.
+- `find_sol_without_collision` peut être ensuite appelée pour chercher une autre configuration
+qui n'implique pas de collision avec l'obstacle. Pour cela, la fonction `solve_serpent_pos_to_angle`
+est rappelée après application d'un offset aléatoire sur les moteurs, jusqu'à ce qu'une configuration
+correcte soit trouvée.
