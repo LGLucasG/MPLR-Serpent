@@ -18,11 +18,13 @@ function [target_q, target_q_succ] = solve_serpent_pos_to_angle(starting_q, targ
 max_dist = n;
 dist = norm(origin - target_pos);
 target_q = zeros(1,n);
+target_q_succ = [target_q];
 
 if(dist > max_dist)
     disp('target_pos is too far away, no solution was found !');
 else if (dist == max_dist)
     target_q(1) = atan(  abs(target_pos(2)-origin(2)) / abs(target_pos(1)-origin(1)) );
+    target_q_succ = [target_q];
 else
     [target_q,target_q_succ] = newton(starting_q,target_pos,obstacle,origin,20);   
 end

@@ -11,7 +11,7 @@ function [qs,qk_temp] = newton(q_start, pos_target, obstacle, origin, iter_max)
 %   qk_temp: tableau contenant toutes les approximations successives
 %   calculées au cours de l'exécution
 
-qk = q_start;
+qk = q_start + 0.1;
 prev_qk = 999999;
 S = F(q_start,pos_target,obstacle,origin);
 iter=0;
