@@ -3,10 +3,10 @@ clear all;clf;
 hold on;
 axis equal;
 
-addpath("segment_intersect\");
-addpath("solvers\");
-addpath("solvers\newton\");
-addpath("dijkstra\");
+addpath("segment_intersect/");
+addpath("solvers/");
+addpath("solvers/newton/");
+addpath("dijkstra/");
 
 %% VARIABLES MODIFIABLES
 % Modifier les variables ci-dessous pour modifier l'expérience
@@ -20,14 +20,14 @@ q = [pi 0 0 0 0];
 
 % Position de l'obstacle (liste des sommets du polygone associé)
 obstacle = [
-    7  5;
+    6  5;
+    6  7;
     7  7;
-    9  7;
-    9  5;
+    7  5;
 ];
 
 % Position cible pour l'effecteur
-target_pos1 = [8 8];
+target_pos1 = [8 7];
 
 
 
