@@ -3,6 +3,11 @@ clear all;clf;
 hold on;
 axis equal;
 
+addpath("segment_intersect\");
+addpath("solvers\");
+addpath("solvers\newton\");
+addpath("dijkstra\");
+
 %% VARIABLES MODIFIABLES
 % Modifier les variables ci-dessous pour modifier l'expérience
 
