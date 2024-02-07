@@ -23,10 +23,15 @@ target_q_succ = [target_q];
 if(dist > max_dist)
     disp('target_pos is too far away, no solution was found !');
 else if (dist == max_dist)
+    disp("MAX LENGTH -------------------------------------------------------------------------------------------------")
     target_q(1) = atan(  abs(target_pos(2)-origin(2)) / abs(target_pos(1)-origin(1)) );
+    if (target_pos(1) - origin(1) < 0)
+        target_q(1) = pi - target_q(1);
+    end
+    disp(target_q)
     target_q_succ = [target_q];
 else
-    [target_q,target_q_succ] = newton(starting_q,target_pos,obstacle,origin,20);   
+    [target_q,target_q_succ] = newton(starting_q,target_pos,obstacle,origin,50);   
 end
 
 
