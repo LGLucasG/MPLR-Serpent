@@ -21,8 +21,8 @@ for i=1:n
     S = S + sin(aggr);
 end
 
-X = pos_target(1) - C;
-Y = pos_target(2) - S;
+X = pos_target(1) - C - origin(1);
+Y = pos_target(2) - S - origin(2);
 ret = [X;Y];
 
 end
